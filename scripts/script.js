@@ -12,13 +12,16 @@ async function makeSWFilmsChart() {
   const filmList = dataBase.results;
   const arrFilms = filmList.map(element => element.title);
   const arrAnios = filmList.map(element => element.release_date.substring(0, 4))
-
-
+  
   var data = {
     labels: arrFilms,
     series: [arrAnios]
   };
   var options = {
+    
+    width: 1000,
+    height: 500,
+    onlyInteger: true,
     showPoint: true,
     showArea: true,
     lineSmooth: true,
@@ -26,11 +29,14 @@ async function makeSWFilmsChart() {
       offset:80
     },
     axisY: {
+      scaleMinSpace: 1,
+      onlyInteger: true,
       offset: 80,
       labelInterpolationFnc: function (value) {
         return '' + value + '';
       }
     }
+
   };
   new Chartist.Line('#SWFilms', data, options);
 }
@@ -54,8 +60,11 @@ async function getCharacters() {
     labels: arrNames,
     series: [arrNumFilms]
   }, {
+    width: 1000,
+    height: 500,
     stackBars: true,
     axisY: {
+      onlyInteger: true,
       labelInterpolationFnc: function(value) {
         return (value) + '';
       }
